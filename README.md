@@ -10,6 +10,8 @@ Repozitorij z gradivi pri predmetu APPR v študijskem letu 2018/19
 Izbrali si boste temo, s katero se bo vaš projekt ukvarjal.
 Tukaj boste napisali, kje ste dobili podatke, ter kakšen je vaš cilj.
 
+razmišljal sem, da bi napisal neki o verstvih in religijah. torej, kako vera vpliva na življenja ludi - koliko otrok imajo, koliko zaslužijo, kako so izobraženi
+
 ## Program
 
 Glavni program in poročilo se nahajata v datoteki `projekt.Rmd`.
