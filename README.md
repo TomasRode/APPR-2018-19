@@ -10,7 +10,7 @@ Repozitorij z gradivi pri predmetu APPR v študijskem letu 2018/19
 Izbrali si boste temo, s katero se bo vaš projekt ukvarjal.
 Tukaj boste napisali, kje ste dobili podatke, ter kakšen je vaš cilj.
 
-razmišljal sem, da bi napisal neki o verstvih in religijah. torej, kako vera vpliva na življenja ludi - koliko otrok imajo, koliko zaslužijo, kako so izobraženi
+Analiziral bom podatke o izobraževanju za države OECD. Za merilo uspešnosti izobraževanja bom, ker gre za države z visoko stopnjo pismenosti, uporabil rezultate testov PISA, ki merijo usprešnost 15-letnikov na treh področjih -- matematika, znanost in branje. Primerjal bom uspešnost držav na teh testih glede na: BDP PPP, število let obveznega šolanja, razmerje med številoma učencev in učiteljev (za osnovne in srednje šole), državno porabo za izobraževanje v % BDP.
 
 ## Program
 
