@@ -5,12 +5,19 @@ Repozitorij z gradivi pri predmetu APPR v študijskem letu 2018/19
 * [![Shiny](http://mybinder.org/badge.svg)](http://beta.mybinder.org/v2/gh/TomasRode/APPR-2018-19/master?urlpath=shiny/APPR-2018-19/projekt.Rmd) Shiny
 * [![RStudio](http://mybinder.org/badge.svg)](http://beta.mybinder.org/v2/gh/TomasRode/APPR-2018-19/master?urlpath=rstudio) RStudio
 
-## Tematika
+## Analiza izobraževanja v državah OECD
 
-Izbrali si boste temo, s katero se bo vaš projekt ukvarjal.
-Tukaj boste napisali, kje ste dobili podatke, ter kakšen je vaš cilj.
+Analiziral bom podatke o izobraževanju za države OECD. Za merilo uspešnosti izobraževanja bom, ker gre za države z visoko stopnjo pismenosti, uporabil rezultate testov PISA, ki merijo usprešnost 15-letnikov na treh področjih -- matematika, znanost in branje. Primerjal bom uspešnost držav na teh testih glede na: BDP PPP, število let obveznega šolanja, razmerje med številoma učencev in učiteljev (za osnovne in srednje šole), državno porabo za izobraževanje v % BDP, sredstva namenjena osebju v izobraževanju v % potrošnje v javnih ustanovah.
 
-Analiziral bom podatke o izobraževanju za države OECD. Za merilo uspešnosti izobraževanja bom, ker gre za države z visoko stopnjo pismenosti, uporabil rezultate testov PISA, ki merijo usprešnost 15-letnikov na treh področjih -- matematika, znanost in branje. Primerjal bom uspešnost držav na teh testih glede na: BDP PPP, število let obveznega šolanja, razmerje med številoma učencev in učiteljev (za osnovne in srednje šole), državno porabo za izobraževanje v % BDP.
+Tabele:
+* tabela 1: država, merjena spremenljivka (PISAMATH), spol, merilo, frekvenca, leto, vrednost
+* tabela 2: država, merjena spremenljivka (PISAREADING), spol, merilo, frekvenca, leto, vrednost
+* tabela 3: država, merjena spremenljivka (PISASCIENCE), spol, merilo, frekvenca, leto, vrednost
+* tabela 3: merjena spremenljivka - BDP PPP, število let obveznega šolanja, razmerje med številoma učencev in učiteljev (za osnovne in srednje šole), državno porabo za izobraževanje v % BDP, sredstva namenjena osebju v izobraževanju v % potrošnje v javnih ustanovah), koda spremenljivke, država, koda države, vrednosti 2000 - 2015
+
+vira: 
+* http://databank.worldbank.org/data/reports.aspx?source=2&Topic=4#advancedDownloadOptions
+* https://data.oecd.org/pisa/science-performance-pisa.htm#indicator-chart
 
 ## Program
 
