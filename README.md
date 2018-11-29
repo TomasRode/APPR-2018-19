@@ -9,11 +9,19 @@ Repozitorij z gradivi pri predmetu APPR v študijskem letu 2018/19
 
 Analiziral bom podatke o izobraževanju za države OECD. Za merilo uspešnosti izobraževanja bom, ker gre za države z visoko stopnjo pismenosti, uporabil rezultate testov PISA, ki merijo usprešnost 15-letnikov na treh področjih -- matematika, znanost in branje. Primerjal bom uspešnost držav na teh testih glede na: BDP PPP, število let obveznega šolanja, razmerje med številoma učencev in učiteljev (za osnovne in srednje šole), državno porabo za izobraževanje v % BDP, sredstva namenjena osebju v izobraževanju v % potrošnje v javnih ustanovah.
 
+Da bom lahko opazoval povezave med temi spremenljivkami, bom podatke uredil v sledeče tabele. 
+
 Tabele:
-* tabela 1: država, merjena spremenljivka (PISAMATH), spol, merilo, frekvenca, leto, vrednost
-* tabela 2: država, merjena spremenljivka (PISAREADING), spol, merilo, frekvenca, leto, vrednost
-* tabela 3: država, merjena spremenljivka (PISASCIENCE), spol, merilo, frekvenca, leto, vrednost
-* tabela 3: merjena spremenljivka - BDP PPP, število let obveznega šolanja, razmerje med številoma učencev in učiteljev (za osnovne in srednje šole), državno porabo za izobraževanje v % BDP, sredstva namenjena osebju v izobraževanju v % potrošnje v javnih ustanovah), koda spremenljivke, država, koda države, vrednosti 2000 - 2015
+* tabela 1: država, leto, spol, PISAMATH
+* tabela 2: država, leto, spol, PISAREADING
+* tabela 3: država, leto, spol, PISASCIENCE
+* tabela 4: država, leto, BDP PPP
+* tabela 5: država, leto, število let obveznega šolanja
+* tabela 6: država, leto, razmerje med številoma učencev in učiteljev za osnovne šole, razmerje za srednje šole
+* tabela 7: država, leto, državna poraba za izobraževanje v % BDP
+* tabela 8: država, leto, sredstva namenjena osebju v izobraževanju v % potrošnje v javnih ustanovah
+
+Podatki v tabelah 4--8 bodo obsegali obdobje med letoma 2000 in 2015, podatki v prvih treh pa bodo dani za leta, ko so bile opravljene meritve, torej v letih 2003, 2006, 2009, 20012, 2015
 
 vira: 
 * http://databank.worldbank.org/data/reports.aspx?source=2&Topic=4#advancedDownloadOptions
