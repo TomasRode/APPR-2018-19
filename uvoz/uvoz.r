@@ -11,8 +11,8 @@ library(data.table)
 PISAmat <- read.csv("PISA_math.csv",quote = "",stringsAsFactors = F) %>% apply(2,function(x){gsubfn('"',"",x)})
 PISArea <- read.csv("PISA_reading.csv",quote = "",stringsAsFactors = F) %>% apply(2,function(x){gsubfn('"',"",x)})
 PISAsci <- read.csv("PISA_science.csv",quote = "",stringsAsFactors = F) %>% apply(2,function(x){gsubfn('"',"",x)})
-#WBD <- fread("WorldBankData_izobrazevanje.csv", col.names = c('vrsta podatka', 'ime drzave', 'drzava', 2000:2002, 2008:2015), quote="") #%>% as.data.frame() %>% apply(2,function(x){gsubfn('"',"",x)}) 
-#WBD1 <- melt(WBD, measure.vars = 4:16,  variable.name = "Leto" )
+WBD <- read.csv("WBD_izobrazevanje.csv", quote = "\"", stringsAsFactors = F, col.names = c('meritev','koda meritve', 'ime drzave', 'drzava', 2000:2017)) %>% as.data.frame() %>% apply(2,function(x){gsubfn('"',"",x)}) 
+
 
 
 # Zapišimo podatke v razpredelnico obcine
