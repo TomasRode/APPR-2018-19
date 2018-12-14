@@ -2,6 +2,8 @@
 library(gsubfn)
 library(dplyr)
 library(data.table)
+library(reshape2)
+library(readr)
 
 # sl <- locale("sl", decimal_mark=",", grouping_mark=".")
 
@@ -11,9 +13,10 @@ library(data.table)
 PISAmat <- read.csv("PISA_math.csv",quote = "",stringsAsFactors = F) %>% apply(2,function(x){gsubfn('"',"",x)})
 PISArea <- read.csv("PISA_reading.csv",quote = "",stringsAsFactors = F) %>% apply(2,function(x){gsubfn('"',"",x)})
 PISAsci <- read.csv("PISA_science.csv",quote = "",stringsAsFactors = F) %>% apply(2,function(x){gsubfn('"',"",x)})
-WBD <- read.csv("WBD_izobrazevanje.csv", quote = "\"", stringsAsFactors = F, na.strings = "..", 
-                col.names = c('meritev','koda meritve', 'ime drzave', 'drzava', 2000:2017)) %>% as.data.frame() %>% 
-       apply(2,function(x){gsubfn('"',"",x)}) 
+WBD <- read_csv("podatki/WBD_izobrazevanje.csv", na="..", n_max=258) 
+WBD <- melt(id.vars=1:4, variable.name="leto", value.name="vrednost")
+WBD <- mutate(leto=parse_number(leto))
+
 #WBD <- melt(WBD, measure.vars = 2000:2017, variable.name = 'leto')
 
 # Zapišimo podatke v razpredelnico obcine
