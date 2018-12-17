@@ -13,11 +13,8 @@ library(readr)
 PISAmat <- read.csv("PISA_math.csv",quote = "",stringsAsFactors = F) %>% apply(2,function(x){gsubfn('"',"",x)})
 PISArea <- read.csv("PISA_reading.csv",quote = "",stringsAsFactors = F) %>% apply(2,function(x){gsubfn('"',"",x)})
 PISAsci <- read.csv("PISA_science.csv",quote = "",stringsAsFactors = F) %>% apply(2,function(x){gsubfn('"',"",x)})
-WBD <- read_csv("podatki/WBD_izobrazevanje.csv", na="..", n_max=258) 
-WBD <- melt(id.vars=1:4, variable.name="leto", value.name="vrednost")
-WBD <- mutate(leto=parse_number(leto))
-
-#WBD <- melt(WBD, measure.vars = 2000:2017, variable.name = 'leto')
+WBD <- read_csv("podatki/WBD_izobrazevanje.csv", na="..", skip=1, n_max=258, col_names = c('meritev','koda meritve','ime drzave','drzava', c(2000:2017))) %>%
+       melt(id.vars=1:4, variable.name="leto", value.name="vrednost")
 
 # Zapišimo podatke v razpredelnico obcine
 
