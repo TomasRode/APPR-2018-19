@@ -10,11 +10,13 @@ library(readr)
 # Funkcija, ki uvozi podatke iz datoteke druzine.csv
 
 #uvoz .csv datotek -- quote in stringsAsFactors, da nam zazna različne stolpce
-PISAmat <- read.csv("PISA_math.csv",quote = "",stringsAsFactors = F) %>% apply(2,function(x){gsubfn('"',"",x)})
-PISArea <- read.csv("PISA_reading.csv",quote = "",stringsAsFactors = F) %>% apply(2,function(x){gsubfn('"',"",x)})
-PISAsci <- read.csv("PISA_science.csv",quote = "",stringsAsFactors = F) %>% apply(2,function(x){gsubfn('"',"",x)})
-WBD <- read_csv("podatki/WBD_izobrazevanje.csv", na="..", skip=1, n_max=258, col_names = c('meritev','koda meritve','ime drzave','drzava', c(2000:2017))) %>%
+PISAmat <- read_csv("podatki/PISAmat.csv", locale=locale(decimal_mark="."))
+PISArea <- read_csv("podatki/PISArea.csv", locale=locale(decimal_mark="."))
+PISAsci <- read_csv("podatki/PISAsci.csv", locale=locale(decimal_mark="."))
+WBD <- read_csv("podatki/WBD_izobrazevanje.csv", na="..", skip=1, n_max=258, 
+                col_names = c('meritev','koda meritve','ime drzave','drzava', c(2000:2017))) %>%
        melt(id.vars=1:4, variable.name="leto", value.name="vrednost")
+PISA <- rbind(PISAmat, PISArea, PISAsci) %>% filter(LOCATION != c("OAVG", 'TWN'))
 
 # Zapišimo podatke v razpredelnico obcine
 
