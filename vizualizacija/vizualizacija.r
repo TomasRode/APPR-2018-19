@@ -3,6 +3,9 @@
 library(ggplot2)
 source('uvoz/uvoz.r')
 
+PISA.povprevje <- PISA %>% filter(SUBJECT=='TOT') %>% group_by(LOCATION, TIME) %>% summarise(povprecje=mean(Value))
+  
+  
 # Uvozimo zemljevid.
 # zemljevid <- uvozi.zemljevid("http://baza.fmf.uni-lj.si/OB.zip", "OB",
 #                              pot.zemljevida="OB", encoding="Windows-1250")
