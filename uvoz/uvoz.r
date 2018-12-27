@@ -21,7 +21,7 @@ uvozi.wbd <- function(){
     filter(TIME != 2015 & TIME != 2016 & TIME != 2017)
   ImenaDrzav <<- select(WBD, 2, 3)
   BDPpc <<- filter(WBD, meritev == 'GDP per capita (constant 2010 US$)') %>% 
-    select(-1, -2) %>% rename(BDPpc_ref2010USD = vrednost)
+    select(-1, -2) %>% rename(BDPpc = vrednost)
   ZaSolstvo <<- filter(WBD, meritev == "Government expenditure on education, total (% of GDP)") %>% 
     select(-1, -2) %>% rename(PotrosnjaZaSolstvo = vrednost)
   RazmerjeOS <<- filter(WBD, meritev == "Pupil-teacher ratio, primary") %>% 
