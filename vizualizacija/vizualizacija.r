@@ -41,12 +41,13 @@ Kpisaobv <- stats::cor(PISA.OBV$ObveznaLeta, PISA.OBV$Value)
 
 
 # Uvozimo zemljevid.
-# zemljevid <- uvozi.zemljevid("http://baza.fmf.uni-lj.si/OB.zip", "OB",
-#                              pot.zemljevida="OB", encoding="Windows-1250")
-# levels(zemljevid$OB_UIME) <- levels(zemljevid$OB_UIME) %>%
-#   { gsub("Slovenskih", "Slov.", .) } %>% { gsub("-", " - ", .) }
-# zemljevid$OB_UIME <- factor(zemljevid$OB_UIME, levels=levels(obcine$obcina))
-# zemljevid <- fortify(zemljevid)
+source('lib/uvozi.zemljevid.r')
+zemljevid <- uvozi.zemljevid("https://www.naturalearthdata.com/http//www.naturalearthdata.com/download/110m/cultural/110m_cultural.zip", 
+                              "110m_cultural", pot.zemljevida="110m_cultural", encoding="Windows-1250") %>% fortify
+ 
+ # levels(zemljevid$OB_UIME) <- levels(zemljevid$OB_UIME) %>%
+ #   { gsub("Slovenskih", "Slov.", .) } %>% { gsub("-", " - ", .) }
+ # zemljevid$OB_UIME <- factor(zemljevid$OB_UIME, levels=levels(obcine$obcina))
 
 # Izračunamo povprečno velikost družine
 # povprecja <- druzine %>% group_by(obcina) %>%
