@@ -48,6 +48,7 @@ zemljevid <- uvozi.zemljevid("https://www.naturalearthdata.com/http//www.natural
 
 ggplot() + geom_polygon(data=zemljevid,aes(x=long,y=lat,group=group))
 
+
  # levels(zemljevid$OB_UIME) <- levels(zemljevid$OB_UIME) %>%
  #   { gsub("Slovenskih", "Slov.", .) } %>% { gsub("-", " - ", .) }
  # zemljevid$OB_UIME <- factor(zemljevid$OB_UIME, levels=levels(obcine$obcina))
