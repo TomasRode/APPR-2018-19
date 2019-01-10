@@ -46,7 +46,14 @@ source('lib/uvozi.zemljevid.r')
 zemljevid <- uvozi.zemljevid("https://www.naturalearthdata.com/http//www.naturalearthdata.com/download/110m/cultural/110m_cultural.zip",
                              "ne_110m_admin_0_countries", encoding="Windows-1250") %>% fortify
 
-ggplot() + geom_polygon(data=zemljevid,aes(x=long,y=lat,group=group))
+
+Pzem <- left_join(zemljevid, PISA.povprecje, by = c('ADM0_A3_US'='LOCATION'))
+drzaveZ <- sort(unique(zemljevid$ADM0_A3_US))
+razlike <- unique(PISA.povprecje$LOCATION)[!(unique(PISA.povprecje$LOCATION)%in%unique(Pzem$ADM0_A3_US))]
+ggplot() + geom_polygon(data=Pzem, aes(x=long,y=lat,group=group, fill=POVPRECJE ))
+
+
+#left_join(zemljevid, PISA.povprecje, by=("ADM0_A3"='LOCATION'))
 
 
  # levels(zemljevid$OB_UIME) <- levels(zemljevid$OB_UIME) %>%
