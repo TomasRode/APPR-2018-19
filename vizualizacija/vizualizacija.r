@@ -44,7 +44,6 @@ source('lib/uvozi.zemljevid.r')
 zemljevid <- uvozi.zemljevid("https://www.naturalearthdata.com/http//www.naturalearthdata.com/download/110m/cultural/110m_cultural.zip",
                              "ne_110m_admin_0_countries", encoding="Windows-1250") %>% fortify
 
-
 Pzem <- left_join(zemljevid, PISA.povprecje, by = c('ADM0_A3_US'='LOCATION'))
 drzaveZ <- sort(unique(zemljevid$ADM0_A3_US))
 razlike <- unique(PISA.povprecje$LOCATION)[!(unique(PISA.povprecje$LOCATION)%in%unique(Pzem$ADM0_A3_US))]
