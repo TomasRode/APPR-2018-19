@@ -7,7 +7,6 @@ output:
     includes:
       in_header: lib/styles.sty
     latex_engine: xelatex
-runtime: shiny
 ---
 
 ```{r setup, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
@@ -26,9 +25,8 @@ source("lib/rstudio.r", encoding="UTF-8")
 
 # Izbira teme
 
-Za vzorec bomo prikazali nekaj podatkov o slovenskih občinah.
+Analiziral bom podatke o izobraževanju za države OECD. Za merilo uspešnosti izobraževanja bom, ker gre za države z visoko stopnjo pismenosti, uporabil rezultate testov PISA, ki merijo usprešnost 15-letnikov na treh področjih -- matematika, znanost in branje. Primerjal bom uspešnost držav na teh testih glede na: BDP PPP, število let obveznega šolanja, razmerje med številoma učencev in učiteljev (za osnovne in srednje šole), državno porabo za izobraževanje v % BDP, sredstva namenjena osebju v izobraževanju v % potrošnje v javnih ustanovah.
 
-![](slike/grb.png)
 
 ***
 
@@ -38,26 +36,50 @@ Za vzorec bomo prikazali nekaj podatkov o slovenskih občinah.
 source("uvoz/uvoz.r", encoding="UTF-8")
 ```
 
-Uvozili smo podatke o občinah v obliki CSV s statističnega urada ter v obliki HTML
-z Wikipedije. Podatke imamo v dveh razpredelnicah v obliki *tidy data*.
+Uvozil sem podatke o občinah v obliki CSV z OECD podatkovne baze.
+Podatke imamo v osmih razpredelnicah v obliki *tidy data*.
 
-1. `druzine` - podatki o družinah za vsako občino
-  - `obcina` - spremenljivka: ime občine (neurejen faktor),
-  - `velikost.druzine` - spremenljivka: število otrok v družini (število: 1, 2, 3 ali 4, kjer zadnja vrednost pomeni 4 ali več),
-  - `stevilo.druzin` - meritev: število družin z ustreznim številom otrok v ustrezni občini (število).
+1. `PISA` - podatki o rezultatih PISA po državah
+  - `LOCATION` - spremenljivka: kratice opazovanih držav, (neurejen faktor)
+  - `INDICATOR` - spremenljivka: predmet testiranja (PISAMATH, PISASCIENCE, PISAREADING), (neurejen faktor) 
+  - `SUBJECT` - spremelnjivka: nabor testirancev (BOY, GIRL, TOT -- fantje, dekleta, vsi), (neurejen faktor)
+  - `TIME` - spremenljivka: leto testiranja, (število)
+  - `Value`- meritev: vrednost indeksa PISA, (število)
+  
+2. `ImenaDrzav` - Imena držav in njihove kratice
+  - `ime.drzave` - spremenljivka: imena držav, (neurejen faktor)
+  - `LOCATION` - meritev: kratice opazovanih držav, (neurejen faktor)
 
-2. `obcine` - podatki o občinah
-  - `obcina` - spremenljivka: ime občine (neurejen faktor),
-  - `povrsina` - meritev: površina občine v km$^2$ (število),
-  - `prebivalci` - meritev: prebivalstvo občine (število),
-  - `gostota` - meritev: število prebivalcev na km$^2$ (število),
-  - `naselja` - meritev: število naselij v občini (število),
-  - `ustanovitev` - meritev: leto ustanovitve občine (število),
-  - `pokrajina` - meritev: pokrajina, ki ji občina pripada (neurejen faktor),
-  - `regija` - meritev: regija, ki ji občina pripada (neurejen faktor),
-  - `odcepitev` - meritev: podatki o občinah, od katerih se je občina odcepila (besedilo).
+3. `BDPpc` - podatki o BDP per capita po državah
+  - `LOCATION` - spremenljivka: kratice opazovanih držav, (neurejen faktor)
+  - `TIME` - spremenljivka: leto meritve, (število)
+  - `BDPpc`- meritev: BDP per capita v stalnih cenah (ref. leto 2010), (število)
+  
+4. `ObveznoSol` - podatki o obveznih letih šolanja po državah
+  - `LOCATION` - spremenljivka: kratice opazovanih držav, (neurejen faktor)
+  - `TIME` - spremenljivka: leto meritve, (število)
+  - `ObveznaLeta`- meritev: vrednost indeksa PISA, (število)
 
-**Opomba**: da bi razpredelnica `obcine` res bila v obliki *tidy data*, bi morali odstraniti stolpec `gostota` (saj je izpeljan iz stolpcev `povrsina` in `prebivalci`), podatke o pokrajinah pa bi morali premakniti v drugo razpredelnico, saj nekatere občine pripadajo dvema pokrajinama. Podobno bi morali narediti tudi s stolpcem `odcepitev`.
+5. `RazmerjeOS` - podatki razmerju med učenci in učitelji na OŠ po državah
+  - `LOCATION` - spremenljivka: kratice opazovanih držav, (neurejen faktor)
+  - `TIME` - spremenljivka: leto meritve, (število)
+  - `RazmerjeUUOS`- meritev: razmerje med učitelji in učenci v OŠ, (število)
+  
+6. `RazmerjeSS` - podatki razmerju med učenci in učitelji na SŠ po državah
+  - `LOCATION` - spremenljivka: kratice opazovanih držav, (neurejen faktor)
+  - `TIME` - spremenljivka: leto meritve, (število)
+  - `RazmerjeUUSS`- meritev: razmerje med učitelji in učenci v SŠ, (število)
+  
+7. `ZaOsebje` - podatki o potrošnji za osebje v izobraževanju po državah
+  - `LOCATION` - spremenljivka: kratice opazovanih držav, (neurejen faktor)
+  - `TIME` - spremenljivka: leto meritve, (število)
+  - `PotrosnjaZaOsebje`- meritev: potrošnja za osebje v izobraževanju (v % celotne potrošnje države v javnih ustanovah), (število)
+  
+8. `ZaIzob` - podatki o državni potrošnji za izobraevaževanje po državah
+  - `LOCATION` - spremenljivka: kratice opazovanih držav, (neurejen faktor)
+  - `TIME` - spremenljivka: leto meritve, (število)
+  - `PotrosnjaZaIzob`- meritev: potrošnja države za izobraževanje (v % BDP), (število).
+
 
 Spodnji graf prikazuje porazdelitev števila naselij v občinah.
 

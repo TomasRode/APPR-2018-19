@@ -15,9 +15,9 @@ PISA.BDPPC <- PISA %>% filter(SUBJECT=='TOT') %>% merge(BDPpc)
 PISAbdppc <- ggplot(PISA.BDPPC, aes(x=BDPpc,y=Value, color=LOCATION)) + geom_point()
 Kpisabdppc <- stats::cor(PISA.BDPPC$BDPpc, PISA.BDPPC$Value)
 
-PISA.ZASO <- PISA %>% filter(SUBJECT=='TOT') %>% merge(ZaSolstvo) %>% filter(is.na(PotrosnjaZaSolstvo) == FALSE)
-PISAzaso <- ggplot(PISA.ZASO, aes(x=PotrosnjaZaSolstvo,y=Value, color=LOCATION)) + geom_point()
-Kpisazaso <- stats::cor(PISA.ZASO$PotrosnjaZaSolstvo,PISA.ZASO$Value)
+PISA.ZAIZ <- PISA %>% filter(SUBJECT=='TOT') %>% merge(ZaIzob) %>% filter(is.na(PotrosnjaZaIzob) == FALSE)
+PISAzaiz <- ggplot(PISA.ZAIZ, aes(x=PotrosnjaZaIzob,y=Value, color=LOCATION)) + geom_point()
+Kpisazaiz <- stats::cor(PISA.ZAIZ$PotrosnjaZaIzob,PISA.ZAIZ$Value)
 
 PISA.RAZO <- PISA %>% filter(SUBJECT=='TOT') %>% merge(RazmerjeOS) %>% filter(is.na(RazmerjeUUOS) == FALSE)
 PISArazo <- ggplot(PISA.RAZO, aes(x=RazmerjeUUOS,y=Value, color=LOCATION)) + geom_point()
