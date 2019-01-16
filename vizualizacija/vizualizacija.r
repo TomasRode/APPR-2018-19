@@ -6,10 +6,14 @@ library(rgeos)
 source('uvoz/uvoz.r')
 
 PISA.povprecje <- PISA %>% filter(SUBJECT=='TOT') %>% group_by(TIME, LOCATION) %>% summarise(POVPRECJE=mean(Value))
-PISApov <- ggplot(PISA.povprecje, aes(x=TIME,y=POVPRECJE, color=LOCATION)) + geom_line()
 
 #NE DOBIMO NIC POSEBNEGA, MEDCASOVNA PRIMERJAVA NI SMISELNA, KER JE TESTE TEZKO SESTAVITI VSAKO LETO ENAKE
 #ZATO LAHKO DELAMO SAMO PRIMERJAVE MED DRZAVAMI
+
+PISA.2015 <- PISA %>% filter(SUBJECT=='TOT' & TIME==2015) %>% group_by(LOCATION) %>% summarise(POVPRECJE=mean(Value))
+PISA2015 <- ggplot(PISA.2015, aes(x= reorder(LOCATION, POVPRECJE),y=POVPRECJE)) + geom_col() + 
+                  ggtitle("Povprečje treh indeksov PISA v letu 2015 po državah") + xlab("Države") + ylab("Povprečje")
+
 
 PISA.BDPPC <- PISA %>% filter(SUBJECT=='TOT') %>% merge(BDPpc)
 PISAbdppc <- ggplot(PISA.BDPPC, aes(x=BDPpc,y=Value, color=LOCATION)) + geom_point()
