@@ -83,11 +83,8 @@ Podatke imamo v osmih razpredelnicah v obliki *tidy data*.
 
 Spodnji graf prikazuje povprecje rezultatov PISAMATH, PISAREADING in PISASCIENCE po državah v letu 2015.
 
-<<<<<<< HEAD
+
 ```{r graf1, echo=FALSE, message=FALSE, fig.align='center', fig.cap='Graf indeksa PISA po državah v letu 2015', warning=FALSE}
-=======
-```{r graf1, echo=FALSE, message=FALSE, fig.align='center', fig.cap='Graf indeksa PISA po državah v letu 2015'}
->>>>>>> f31de5fe8f7a357c86cc937199e0fc88c13aaa74
 PISA.2015 <- PISA %>% filter(SUBJECT=='TOT' & TIME==2015) %>% 
                   group_by(LOCATION) %>% summarise(POVPRECJE=mean(Value))
 barve <- ifelse(PISA.2015$LOCATION=='SVN', 'JE', 'NI')
@@ -108,11 +105,9 @@ source("vizualizacija/vizualizacija.r", encoding="UTF-8")
 
 Spodnji zemljevid prikazuje povprečje indeksa PISA med letoma 2003 in 2015 po državah. Na zemljevidu niso zaradi nerazrešenega mednarodnopravnega statusa ne najdemo Hong-Konga, Singapurja in Macaa.
 
-<<<<<<< HEAD
+
+
 ```{r zemljevid, echo=FALSE, fig.align='center', fig.cap='Zemljevid povprečja indeksa PISA med letoma 2003 in 2015', warning=FALSE}
-=======
-```{r zemljevid, echo=FALSE, fig.align='center', fig.cap='Zemljevid povprečja indeksa PISA med letoma 2003 in 2015'}
->>>>>>> f31de5fe8f7a357c86cc937199e0fc88c13aaa74
 Pzemljevid
 ```
 
