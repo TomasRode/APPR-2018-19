@@ -5,14 +5,14 @@ library(rgdal)
 library(rgeos)
 source('uvoz/uvoz.r')
 
-PISA.povprecje <- PISA %>% filter(SUBJECT=='TOT') %>% group_by(TIME, LOCATION) %>% summarise(POVPRECJE=mean(Value))
+PISA.povprecje <- PISA %>% filter(SUBJECT=='TOT') %>% group_by(LOCATION) %>% summarise(POVPRECJE=mean(Value))
 
-#NE DOBIMO NIC POSEBNEGA, MEDCASOVNA PRIMERJAVA NI SMISELNA, KER JE TESTE TEZKO SESTAVITI VSAKO LETO ENAKE
-#ZATO LAHKO DELAMO SAMO PRIMERJAVE MED DRZAVAMI
 
 PISA.2015 <- PISA %>% filter(SUBJECT=='TOT' & TIME==2015) %>% group_by(LOCATION) %>% summarise(POVPRECJE=mean(Value))
-PISA2015 <- ggplot(PISA.2015, aes(x= reorder(LOCATION, POVPRECJE),y=POVPRECJE)) + geom_col() + 
-                  ggtitle("Povprečje treh indeksov PISA v letu 2015 po državah") + xlab("Države") + ylab("Povprečje")
+barve <- ifelse(PISA.2015$LOCATION=='SVN', 'JE', 'NI')
+PISA2015 <- ggplot(PISA.2015, aes(x= reorder(LOCATION, POVPRECJE),y=POVPRECJE, fill = barve)) + geom_col(show.legend = FALSE) + 
+                  ggtitle("Povprečje treh indeksov PISA v letu 2015 po državah") + 
+                  xlab("Države") + ylab("Povprečje") + theme(axis.text.x=element_text(angle=90, hjust=1, vjust=0.5))
 
 
 PISA.BDPPC <- PISA %>% filter(SUBJECT=='TOT') %>% merge(BDPpc)
@@ -46,12 +46,12 @@ Kpisaobv <- stats::cor(PISA.OBV$ObveznaLeta, PISA.OBV$Value)
 source('lib/uvozi.zemljevid.r')
 
 zemljevid <- uvozi.zemljevid("https://www.naturalearthdata.com/http//www.naturalearthdata.com/download/110m/cultural/110m_cultural.zip",
-                             "ne_110m_admin_0_countries", encoding="Windows-1250") %>% fortify
+                             "ne_110m_admin_0_countries", encoding="UTF-8") %>% fortify
 
 Pzem <- left_join(zemljevid, PISA.povprecje, by = c('ADM0_A3_US'='LOCATION'))
 drzaveZ <- sort(unique(zemljevid$ADM0_A3_US))
 razlike <- unique(PISA.povprecje$LOCATION)[!(unique(PISA.povprecje$LOCATION)%in%unique(Pzem$ADM0_A3_US))]
 # težava: zemljevid nima vnešenih sledečih držav: HONG-KONG, SINGAPUR, MACAO
-ggplot() + geom_polygon(data=Pzem, aes(x=long,y=lat,group=group, fill=POVPRECJE ))
+Pzemljevid <- ggplot() + geom_polygon(data=Pzem, aes(x=long,y=lat,group=group, fill=POVPRECJE ))
 
 
