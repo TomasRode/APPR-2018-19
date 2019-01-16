@@ -15,28 +15,31 @@ PISA2015 <- ggplot(PISA.2015, aes(x= reorder(LOCATION, POVPRECJE),y=POVPRECJE, f
                   xlab("Države") + ylab("Povprečje") + theme(axis.text.x=element_text(angle=90, hjust=1, vjust=0.5))
 
 
-PISA.BDPPC <- PISA %>% filter(SUBJECT=='TOT') %>% merge(BDPpc)
-PISAbdppc <- ggplot(PISA.BDPPC, aes(x=BDPpc,y=Value, color=LOCATION)) + geom_point()
-Kpisabdppc <- stats::cor(PISA.BDPPC$BDPpc, PISA.BDPPC$Value)
+PISA.BDPPC <- PISA %>% filter(SUBJECT=='TOT')%>% group_by(LOCATION,TIME) %>% summarise(POVPRECJE=mean(Value)) %>% merge(BDPpc)
+PISAbdppc <- ggplot(PISA.BDPPC, aes(x=BDPpc,y=POVPRECJE)) + geom_point() + geom_smooth(method="loess") +
+                    ggtitle("Povprečje indeksov PISA po BDP per capita") + 
+                    xlab("BDP per capita") + ylab("Povprečje indeksov PISA")
+
+Kpisabdppc <- stats::cor(PISA.BDPPC$BDPpc, PISA.BDPPC$POVPRECJE)
 
 PISA.ZAIZ <- PISA %>% filter(SUBJECT=='TOT') %>% merge(ZaIzob) %>% filter(is.na(PotrosnjaZaIzob) == FALSE)
-PISAzaiz <- ggplot(PISA.ZAIZ, aes(x=PotrosnjaZaIzob,y=Value, color=LOCATION)) + geom_point()
+PISAzaiz <- ggplot(PISA.ZAIZ, aes(x=PotrosnjaZaIzob,y=Value)) + geom_point() + geom_smooth(method="lm")
 Kpisazaiz <- stats::cor(PISA.ZAIZ$PotrosnjaZaIzob,PISA.ZAIZ$Value)
 
 PISA.RAZO <- PISA %>% filter(SUBJECT=='TOT') %>% merge(RazmerjeOS) %>% filter(is.na(RazmerjeUUOS) == FALSE)
-PISArazo <- ggplot(PISA.RAZO, aes(x=RazmerjeUUOS,y=Value, color=LOCATION)) + geom_point()
+PISArazo <- ggplot(PISA.RAZO, aes(x=RazmerjeUUOS,y=Value)) + geom_point() + geom_smooth(method="lm")
 Kpisarazo <- stats::cor(PISA.RAZO$RazmerjeUUOS,PISA.RAZO$Value)
 
 PISA.RAZS <- PISA %>% filter(SUBJECT=='TOT') %>% merge(RazmerjeSS) %>% filter(is.na(RazmerjeUUSS) == FALSE)
-PISArazs <- ggplot(PISA.RAZS, aes(x=RazmerjeUUSS,y=Value, color=LOCATION)) + geom_point()
+PISArazs <- ggplot(PISA.RAZS, aes(x=RazmerjeUUSS,y=Value)) + geom_point() + geom_smooth(method="lm")
 Kpisarazs <- stats::cor(PISA.RAZS$RazmerjeUUSS,PISA.RAZS$Value)
 
-PISA.ZAOS <- PISA %>% filter(SUBJECT=='TOT') %>% merge(ZaOsebje) %>% filter(is.na(PotrosnjaZaOsebje) == FALSE)
-PISAzaos <- ggplot(PISA.ZAOS, aes(x=PotrosnjaZaOsebje,y=Value, color=LOCATION)) + geom_point()
+PISA.ZAOS <- PISA %>% filter(SUBJECT=='TOT', LOCATION!='EST') %>% merge(ZaOsebje) %>% filter(is.na(PotrosnjaZaOsebje) == FALSE)
+PISAzaos <- ggplot(PISA.ZAOS, aes(x=PotrosnjaZaOsebje,y=Value)) + geom_point() + geom_smooth(method="lm")
 Kpisazaos <- stats::cor(PISA.ZAOS$PotrosnjaZaOsebje,PISA.ZAOS$Value)
 
 PISA.OBV <- PISA %>% filter(SUBJECT=='TOT') %>% merge(ObveznoSol) %>% filter(is.na(ObveznaLeta) == FALSE)
-PISAobv <- ggplot(PISA.OBV, aes(x=ObveznaLeta,y=Value, color=LOCATION)) + geom_point()
+PISAobv <- ggplot(PISA.OBV, aes(x=ObveznaLeta,y=Value)) + geom_point()
 Kpisaobv <- stats::cor(PISA.OBV$ObveznaLeta, PISA.OBV$Value)
 
 

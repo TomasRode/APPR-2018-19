@@ -103,12 +103,17 @@ ggplot(PISA.2015, aes(x= reorder(LOCATION, POVPRECJE),y=POVPRECJE, fill = barve)
 source("vizualizacija/vizualizacija.r", encoding="UTF-8")
 ```
 
-Spodnji zemljevid prikazuje povprečje indeksa PISA med letoma 2003 in 2015 po državah. Na zemljevidu niso zaradi nerazrešenega mednarodnopravnega statusa ne najdemo Hong-Konga, Singapurja in Macaa.
-
-
+Spodnji zemljevid prikazuje povprečje indeksa PISA med letoma 2003 in 2015 po državah. Na zemljevidu zaradi neobičajnega mednarodnopravnega statusa ne najdemo Hong-Konga, Singapurja in Macaa.
 
 ```{r zemljevid, echo=FALSE, fig.align='center', fig.cap='Zemljevid povprečja indeksa PISA med letoma 2003 in 2015', warning=FALSE}
 Pzemljevid
 ```
+
+Spodnji graf prikazuje odnos med BDP per capita in uspehom učencev na testiranjih. Vidimo lahko, da je povezava močna predvsem pri manj razvitih državah, ki praviloma dosegajo slabše rezultate od bolje razvitih držav. Pri državah z BDP per capita višjim od 20.000 USD (za predstavo - Slovenija ima okoli 23.500 USD), pa BDP per capita ne igra tako poglavitne vloge.
+
+```{r graf2, echo=FALSE, fig.align='center', fig.cap='Graf povprečja indeksov PISA po BDP per capita', warning=FALSE}
+PISAbdppc
+```
+
 
 ***
