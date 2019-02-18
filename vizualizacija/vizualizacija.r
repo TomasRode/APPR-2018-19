@@ -18,32 +18,41 @@ PISA2015 <- ggplot(PISA.2015, aes(x= reorder(LOCATION, POVPRECJE),y=POVPRECJE, f
 PISA.BDPPC <- PISA %>% filter(SUBJECT=='TOT')%>% group_by(LOCATION,TIME) %>% summarise(POVPRECJE=mean(Value)) %>% merge(BDPpc)
 PISAbdppc <- ggplot(PISA.BDPPC, aes(x=BDPpc,y=POVPRECJE)) + geom_point() + geom_smooth(method="loess") +
                     ggtitle("Povprečje indeksov PISA po BDP per capita") + 
-                    xlab("BDP per capita") + ylab("Povprečje indeksov PISA")
+                    xlab("BDP per capita (v USD)") + ylab("Povprečje indeksov PISA")
 
 Kpisabdppc <- stats::cor(PISA.BDPPC$BDPpc, PISA.BDPPC$POVPRECJE)
 
-PISA.ZAIZ <- PISA %>% filter(SUBJECT=='TOT') %>% merge(ZaIzob) %>% filter(is.na(PotrosnjaZaIzob) == FALSE)
-PISAzaiz <- ggplot(PISA.ZAIZ, aes(x=PotrosnjaZaIzob,y=Value)) + geom_point() + geom_smooth(method="lm")
-Kpisazaiz <- stats::cor(PISA.ZAIZ$PotrosnjaZaIzob,PISA.ZAIZ$Value)
+PISA.ZAIZ <- PISA %>% filter(SUBJECT=='TOT') %>% group_by(LOCATION,TIME) %>% summarise(POVPRECJE=mean(Value)) %>% merge(ZaIzob) %>% filter(is.na(PotrosnjaZaIzob) == FALSE)
+PISAzaiz <- ggplot(PISA.ZAIZ, aes(x=PotrosnjaZaIzob,y=POVPRECJE)) + geom_point() + geom_smooth(method="lm")
+Kpisazaiz <- stats::cor(PISA.ZAIZ$PotrosnjaZaIzob,PISA.ZAIZ$POVPRECJE)
 
-PISA.RAZO <- PISA %>% filter(SUBJECT=='TOT') %>% merge(RazmerjeOS) %>% filter(is.na(RazmerjeUUOS) == FALSE)
-PISArazo <- ggplot(PISA.RAZO, aes(x=RazmerjeUUOS,y=Value)) + geom_point() + geom_smooth(method="lm")
-Kpisarazo <- stats::cor(PISA.RAZO$RazmerjeUUOS,PISA.RAZO$Value)
+PISA.RAZO <- PISA %>% filter(SUBJECT=='TOT') %>% group_by(LOCATION,TIME) %>% summarise(POVPRECJE=mean(Value)) %>% merge(RazmerjeOS) %>% filter(is.na(RazmerjeUUOS) == FALSE)
+PISArazo <- ggplot(PISA.RAZO, aes(x=RazmerjeUUOS,y=POVPRECJE)) + geom_point() + geom_smooth(method="lm")
+Kpisarazo <- stats::cor(PISA.RAZO$RazmerjeUUOS,PISA.RAZO$POVPRECJE)
 
-PISA.RAZS <- PISA %>% filter(SUBJECT=='TOT') %>% merge(RazmerjeSS) %>% filter(is.na(RazmerjeUUSS) == FALSE)
-PISArazs <- ggplot(PISA.RAZS, aes(x=RazmerjeUUSS,y=Value)) + geom_point() + geom_smooth(method="lm")
-Kpisarazs <- stats::cor(PISA.RAZS$RazmerjeUUSS,PISA.RAZS$Value)
+PISA.RAZS <- PISA %>% filter(SUBJECT=='TOT') %>% group_by(LOCATION,TIME) %>% summarise(POVPRECJE=mean(Value)) %>% merge(RazmerjeSS) %>% filter(is.na(RazmerjeUUSS) == FALSE)
+PISArazs <- ggplot(PISA.RAZS, aes(x=RazmerjeUUSS,y=POVPRECJE)) + geom_point() + geom_smooth(method="lm")
+Kpisarazs <- stats::cor(PISA.RAZS$RazmerjeUUSS,PISA.RAZS$POVPRECJE)
 
-PISA.ZAOS <- PISA %>% filter(SUBJECT=='TOT', LOCATION!='EST') %>% merge(ZaOsebje) %>% filter(is.na(PotrosnjaZaOsebje) == FALSE)
-PISAzaos <- ggplot(PISA.ZAOS, aes(x=PotrosnjaZaOsebje,y=Value)) + geom_point() + geom_smooth(method="lm")
-Kpisazaos <- stats::cor(PISA.ZAOS$PotrosnjaZaOsebje,PISA.ZAOS$Value)
+PISA.ZAOS <- PISA %>% filter(SUBJECT=='TOT', LOCATION!='EST') %>% group_by(LOCATION,TIME) %>% summarise(POVPRECJE=mean(Value)) %>% merge(ZaOsebje) %>% filter(is.na(PotrosnjaZaOsebje) == FALSE)
+PISAzaos <- ggplot(PISA.ZAOS, aes(x=PotrosnjaZaOsebje,y=POVPRECJE)) + geom_point() + geom_smooth(method="lm")
+Kpisazaos <- stats::cor(PISA.ZAOS$PotrosnjaZaOsebje,PISA.ZAOS$POVPRECJE)
 
-PISA.OBV <- PISA %>% filter(SUBJECT=='TOT') %>% merge(ObveznoSol) %>% filter(is.na(ObveznaLeta) == FALSE)
-PISAobv <- ggplot(PISA.OBV, aes(x=ObveznaLeta,y=Value)) + geom_point()
-Kpisaobv <- stats::cor(PISA.OBV$ObveznaLeta, PISA.OBV$Value)
+PISA.OBV <- PISA %>% filter(SUBJECT=='TOT') %>% group_by(LOCATION,TIME) %>% summarise(POVPRECJE=mean(Value)) %>% merge(ObveznoSol) %>% filter(is.na(ObveznaLeta) == FALSE)
+PISAobv <- ggplot(PISA.OBV, aes(x=ObveznaLeta,y=POVPRECJE)) + geom_col()
+Kpisaobv <- stats::cor(PISA.OBV$ObveznaLeta, PISA.OBV$POVPRECJE)
 
+##RAZLIKA MED SPOLOMA
 
+PISA.SPOL <- PISA %>% filter(SUBJECT != 'TOT') %>% group_by(LOCATION,TIME, SUBJECT) %>% summarise(POVPRECJE=mean(Value))
 
+PISA.RAZLIKA <- PISA.SPOL %>% dcast(LOCATION + TIME ~ SUBJECT) %>% transmute(LOCATION, TIME, RAZLIKA=GIRL-BOY) %>% group_by(LOCATION) %>% summarise(PRAZ = mean(RAZLIKA))
+PISArazlika <- ggplot(PISA.RAZLIKA, aes(x= reorder(LOCATION, PRAZ),y=PRAZ)) + geom_col() + 
+                      ggtitle("Povprečna razlika med rezultati dečkov in deklet po državah") + 
+                      xlab("Države") + ylab("Povprečna razlika (v številu šresežnih točk pri dekletih)") + theme(axis.text.x=element_text(angle=90, hjust=1, vjust=0.5))
+
+PISA.spol.bdp <- PISA.SPOL %>% dcast(LOCATION + TIME ~ SUBJECT) %>% transmute(LOCATION, TIME, RAZLIKA=BOY-GIRL) %>% merge(BDPpc)
+Kpisaspolbdp <- stats::cor(PISA.spol.bdp$RAZLIKA, PISA.spol.bdp$BDPpc)
 
 # Uvozimo zemljevid.
 source('lib/uvozi.zemljevid.r')

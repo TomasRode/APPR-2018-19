@@ -114,6 +114,8 @@ Spodnji graf prikazuje odnos med BDP per capita in uspehom učencev na testiranj
 ```{r graf2, echo=FALSE, fig.align='center', fig.cap='Graf povprečja indeksov PISA po BDP per capita', warning=FALSE}
 PISAbdppc
 ```
-
+```{r graf3, echo=FALSE, fig.align='center', fig.cap='Graf povprečja indeksov PISA po BDP per capita', warning=FALSE}
+PISArazo
+```
 
 ***
