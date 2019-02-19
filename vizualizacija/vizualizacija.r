@@ -46,6 +46,9 @@ Kpisaobv <- stats::cor(PISA.OBV$ObveznaLeta, PISA.OBV$POVPRECJE)
 
 PISA.SPOL <- PISA %>% filter(SUBJECT != 'TOT') %>% group_by(LOCATION,TIME, SUBJECT) %>% summarise(POVPRECJE=mean(Value))
 
+PISAspol <- ggplot(PISA.SPOL, aes(x=BDPpc,y=POVPRECJE)) + geom_point()
+
+
 PISA.RAZLIKA <- PISA.SPOL %>% dcast(LOCATION + TIME ~ SUBJECT) %>% transmute(LOCATION, TIME, RAZLIKA=GIRL-BOY) %>% group_by(LOCATION) %>% summarise(PRAZ = mean(RAZLIKA))
 PISArazlika <- ggplot(PISA.RAZLIKA, aes(x= reorder(LOCATION, PRAZ),y=PRAZ)) + geom_col() + 
                       ggtitle("Povprečna razlika med rezultati dečkov in deklet po državah") + 
