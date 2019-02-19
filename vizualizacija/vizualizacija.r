@@ -45,6 +45,10 @@ Kpisaobv <- stats::cor(PISA.OBV$ObveznaLeta, PISA.OBV$POVPRECJE)
 ##RAZLIKA MED SPOLOMA
 
 PISA.SPOL <- PISA %>% filter(SUBJECT != 'TOT') %>% group_by(LOCATION,TIME, SUBJECT) %>% summarise(POVPRECJE=mean(Value))
+<<<<<<< HEAD
+=======
+PISAspol <- ggplot(PISA.SPOL, aes(x=BDPpc,y=POVPRECJE)) + geom_point()
+>>>>>>> e49f23bde4b31ec5eb79b4a83dc6df60c6f29e6a
 
 PISA.RAZLIKA <- PISA.SPOL %>% dcast(LOCATION + TIME ~ SUBJECT) %>% transmute(LOCATION, TIME, RAZLIKA=GIRL-BOY) %>% group_by(LOCATION) %>% summarise(PRAZ = mean(RAZLIKA))
 PISArazlika <- ggplot(PISA.RAZLIKA, aes(x= reorder(LOCATION, PRAZ),y=PRAZ)) + geom_col() + 
