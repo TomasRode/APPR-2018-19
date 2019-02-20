@@ -27,7 +27,9 @@ PISAzaiz <- ggplot(PISA.ZAIZ, aes(x=PotrosnjaZaIzob,y=POVPRECJE)) + geom_point()
 Kpisazaiz <- stats::cor(PISA.ZAIZ$PotrosnjaZaIzob,PISA.ZAIZ$POVPRECJE)
 
 PISA.RAZO <- PISA %>% filter(SUBJECT=='TOT') %>% group_by(LOCATION,TIME) %>% summarise(POVPRECJE=mean(Value)) %>% merge(RazmerjeOS) %>% filter(is.na(RazmerjeUUOS) == FALSE)
-PISArazo <- ggplot(PISA.RAZO, aes(x=RazmerjeUUOS,y=POVPRECJE)) + geom_point() + geom_smooth(method="lm")
+PISArazo <- ggplot(PISA.RAZO, aes(x=RazmerjeUUOS,y=POVPRECJE)) + geom_point() + geom_smooth(method="lm")+
+            ggtitle("Povprečje indeksov PISA po razmerju med učenci in učitelji v osnovni šoli") + 
+            xlab("Razmerje med učenci in učitelji v osnovni šoli") + ylab("Povprečje indeksov PISA")
 Kpisarazo <- stats::cor(PISA.RAZO$RazmerjeUUOS,PISA.RAZO$POVPRECJE)
 
 PISA.RAZS <- PISA %>% filter(SUBJECT=='TOT') %>% group_by(LOCATION,TIME) %>% summarise(POVPRECJE=mean(Value)) %>% merge(RazmerjeSS) %>% filter(is.na(RazmerjeUUSS) == FALSE)
@@ -45,17 +47,16 @@ Kpisaobv <- stats::cor(PISA.OBV$ObveznaLeta, PISA.OBV$POVPRECJE)
 ##RAZLIKA MED SPOLOMA
 
 PISA.SPOL <- PISA %>% filter(SUBJECT != 'TOT') %>% group_by(LOCATION,TIME, SUBJECT) %>% summarise(POVPRECJE=mean(Value))
-
-PISAspol <- ggplot(PISA.SPOL, aes(x=BDPpc,y=POVPRECJE)) + geom_point()
+PISA.spol.bdp <- PISA.SPOL %>% dcast(LOCATION + TIME ~ SUBJECT) %>% transmute(LOCATION, TIME, RAZLIKA=BOY-GIRL) %>% merge(BDPpc)
+Kpisaspolbdp <- stats::cor(PISA.spol.bdp$RAZLIKA, PISA.spol.bdp$BDPpc)
 
 
 PISA.RAZLIKA <- PISA.SPOL %>% dcast(LOCATION + TIME ~ SUBJECT) %>% transmute(LOCATION, TIME, RAZLIKA=GIRL-BOY) %>% group_by(LOCATION) %>% summarise(PRAZ = mean(RAZLIKA))
-PISArazlika <- ggplot(PISA.RAZLIKA, aes(x= reorder(LOCATION, PRAZ),y=PRAZ)) + geom_col() + 
+PISArazlika <- ggplot(PISA.RAZLIKA, aes(x= reorder(LOCATION, PRAZ),y=PRAZ, fill=barve)) + geom_col(show.legend = FALSE) + 
                       ggtitle("Povprečna razlika med rezultati dečkov in deklet po državah") + 
                       xlab("Države") + ylab("Povprečna razlika (v številu šresežnih točk pri dekletih)") + theme(axis.text.x=element_text(angle=90, hjust=1, vjust=0.5))
 
-PISA.spol.bdp <- PISA.SPOL %>% dcast(LOCATION + TIME ~ SUBJECT) %>% transmute(LOCATION, TIME, RAZLIKA=BOY-GIRL) %>% merge(BDPpc)
-Kpisaspolbdp <- stats::cor(PISA.spol.bdp$RAZLIKA, PISA.spol.bdp$BDPpc)
+
 
 # Uvozimo zemljevid.
 source('lib/uvozi.zemljevid.r')
