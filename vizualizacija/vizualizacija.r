@@ -62,8 +62,13 @@ PISArazlika <- ggplot(PISA.RAZLIKA, aes(x= reorder(LOCATION, PRAZ),y=PRAZ, fill=
                       ggtitle("Povprečna razlika med rezultati dečkov in deklet po državah") + 
                       xlab("Države") + ylab("Povprečna razlika (v številu šresežnih točk pri dekletih)") + theme(axis.text.x=element_text(angle=90, hjust=1, vjust=0.5))
 
-
-
+PISA.DEKvsPOVP <- merge(PISA.RAZLIKA, PISA.povprecje)
+PISAdekletavspovp <- ggplot(PISA.DEKvsPOVP, aes(x=PRAZ,y=POVPRECJE)) + geom_point() + geom_smooth(method="lm")+
+  ggtitle("Povprečje indeksov PISA po povprečni razliki med rezultati deklet in dečkov") + 
+  xlab("Povprečna razlika (v številu šresežnih točk pri dekletih)") + ylab("Povprečje indeksov PISA")
+Kpisadekvspovp <- stats::cor(PISA.DEKvsPOVP$PRAZ, PISA.DEKvsPOVP$POVPRECJE)
+  
+  
 # Uvozimo zemljevid.
 
 source('lib/uvozi.zemljevid.r')

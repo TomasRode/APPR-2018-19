@@ -115,13 +115,26 @@ Spodnji graf prikazuje odnos med BDP per capita in uspehom učencev na testiranj
 PISAbdppc
 ```
 
-
+Na naslednjem grafu lahko opazimo nov dejavnik, ki vpliva na uspešnost učencev pri testiranjih. Kot pričakovano, so učenci v državah, kjer so učni razredi manjši, praviloma dosegali boljše rezultate. Zdi se torej, da je individualni pristop k posredovanju znanja uspešnejši. Ob tem velja poudariti, da je velikost razredov le eden od dejavnikov, ki vplivajo na uspešnost učencev, zato korelacija ostaja šibka (-0.36). Hkrati je iz podatkov možno sklepati, da povezava med tema spremenljivkama obstaja.
 
 ```{r graf3, echo=FALSE, fig.align='center', fig.cap='Graf povprečja indeksov PISA po razmerju med učenci in učitelji', warning=FALSE}
 PISArazo
 ```
 
+
+
+Do zanimivih zaključkov lahko pridemo, ko primerjamo rezulate PISA med spoloma. Kot prikazuje spodnji graf dekleta v skoraj vseh državah dosegajo boljše rezultate od dečkov. 
+
 ```{r graf4, echo=FALSE, fig.align='center', fig.cap='Graf razlike indeksov PISA med spoloma po državah', warning=FALSE}
 PISArazlika
 ```
+
+Če smo pozorni lahko opazimo, da so države, kjer so razike velike, tiste, ki so celokupno uspešejše na testiranjih, tiste, kjer so razlike manjše pa praviloma dosegajo slabše razultate. Povezavo med povprečno razliko med spoloma in povprečjem indeksov PISA prikazuje spodnji graf.
+
+```{r graf5, echo=FALSE, fig.align='center', fig.cap='Graf povprečja indeksov PISA po povprečni razliki med rezultati deklet in dečkov', warning=FALSE}
+PISAdekletavspovp
+```
+
+Iz tega grafa bi lahko sklepali, da so dekleta pri testiranjih bolj uspešna od dečkov in da se razlika med spoloma pri bolj optimalnih pogojih samo še povečuje.
+
 ***
