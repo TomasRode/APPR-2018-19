@@ -5,8 +5,11 @@ library(rgdal)
 library(rgeos)
 source('uvoz/uvoz.r')
 
+###NAJPREJ MI ZDRUŽI MAT/SCI/REA
+
 PISA.povprecje <- PISA %>% filter(SUBJECT=='TOT') %>% group_by(LOCATION) %>% summarise(POVPRECJE=mean(Value))
 
+###meddržavna primerjava
 
 PISA.2015 <- PISA %>% filter(SUBJECT=='TOT' & TIME==2015) %>% group_by(LOCATION) %>% summarise(POVPRECJE=mean(Value))
 barve <- ifelse(PISA.2015$LOCATION=='SVN', 'JE', 'NI')
@@ -14,6 +17,7 @@ PISA2015 <- ggplot(PISA.2015, aes(x= reorder(LOCATION, POVPRECJE),y=POVPRECJE, f
                   ggtitle("Povprečje treh indeksov PISA v letu 2015 po državah") + 
                   xlab("Države") + ylab("Povprečje") + theme(axis.text.x=element_text(angle=90, hjust=1, vjust=0.5))
 
+###PO BDPPC
 
 PISA.BDPPC <- PISA %>% filter(SUBJECT=='TOT')%>% group_by(LOCATION,TIME) %>% summarise(POVPRECJE=mean(Value)) %>% merge(BDPpc)
 PISAbdppc <- ggplot(PISA.BDPPC, aes(x=BDPpc,y=POVPRECJE)) + geom_point() + geom_smooth(method="loess") +
@@ -21,6 +25,8 @@ PISAbdppc <- ggplot(PISA.BDPPC, aes(x=BDPpc,y=POVPRECJE)) + geom_point() + geom_
                     xlab("BDP per capita (v USD)") + ylab("Povprečje indeksov PISA")
 
 Kpisabdppc <- stats::cor(PISA.BDPPC$BDPpc, PISA.BDPPC$POVPRECJE)
+
+### OSTALE SPREMENLJIVKE
 
 PISA.ZAIZ <- PISA %>% filter(SUBJECT=='TOT') %>% group_by(LOCATION,TIME) %>% summarise(POVPRECJE=mean(Value)) %>% merge(ZaIzob) %>% filter(is.na(PotrosnjaZaIzob) == FALSE)
 PISAzaiz <- ggplot(PISA.ZAIZ, aes(x=PotrosnjaZaIzob,y=POVPRECJE)) + geom_point() + geom_smooth(method="lm")
@@ -59,6 +65,7 @@ PISArazlika <- ggplot(PISA.RAZLIKA, aes(x= reorder(LOCATION, PRAZ),y=PRAZ, fill=
 
 
 # Uvozimo zemljevid.
+
 source('lib/uvozi.zemljevid.r')
 
 zemljevid <- uvozi.zemljevid("https://www.naturalearthdata.com/http//www.naturalearthdata.com/download/110m/cultural/110m_cultural.zip",
