@@ -19,10 +19,14 @@ ggdendrogram(Model)
   
 
 # Število skupin
-n <- 4
+n <- 7
 skupine <- hclust(dist(scale(PodatkiRazvrscanje))) %>% cutree(n)
 
 tabelaskupin <- data.frame(as.list(skupine))
 imena <- names(tabelaskupin)
 
 tabelaskupin <- data.frame(imena, skupine) %>% rename(LOCATION = imena, SKUPINE = skupine)
+rownames(tabelaskupin) <- c()
+
+Rzem <- left_join(zemljevid, tabelaskupin, by = c('ADM0_A3_US'='LOCATION'))
+Rzemljevid <- ggplot() + geom_polygon(data=Rzem, aes(x=long,y=lat,group=group, fill=factor(SKUPINE) ))
