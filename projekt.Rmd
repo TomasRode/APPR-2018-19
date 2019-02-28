@@ -121,8 +121,6 @@ Na naslednjem grafu lahko opazimo nov dejavnik, ki vpliva na uspešnost učencev
 PISArazo
 ```
 
-
-
 Do zanimivih zaključkov lahko pridemo, ko primerjamo rezulate PISA med spoloma. Kot prikazuje spodnji graf dekleta v skoraj vseh državah dosegajo boljše rezultate od dečkov. 
 
 ```{r graf4, echo=FALSE, fig.align='center', fig.cap='Graf razlike indeksov PISA med spoloma po državah', warning=FALSE}

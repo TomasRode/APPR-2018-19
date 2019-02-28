@@ -1,6 +1,4 @@
 # 4. faza: Analiza podatkov
-require(ggdendro)
-
 
 PodatkiRazvrscanje <- PISA %>% group_by(LOCATION, SUBJECT) %>% summarise(POVPRECJE=mean(Value))%>% dcast(LOCATION ~ SUBJECT) %>% 
                           merge(BDPpc %>% group_by(LOCATION) %>% summarise(PovBDPpc=mean(BDPpc, na.rm=TRUE))) %>%
@@ -13,9 +11,9 @@ PodatkiRazvrscanje <- PISA %>% group_by(LOCATION, SUBJECT) %>% summarise(POVPREC
 rownames(PodatkiRazvrscanje) <- PodatkiRazvrscanje$LOCATION
 PodatkiRazvrscanje <- PodatkiRazvrscanje[-1]
 
-Model <- hclust(dist(scale(PodatkiRazvrscanje)))
-
-ggdendrogram(Model)
+# HIERARHIČNO RAZVRŠČANJE -- to je zame
+# Model <- hclust(dist(scale(PodatkiRazvrscanje)))
+# ggdendrogram(Model)
   
 
 # Število skupin

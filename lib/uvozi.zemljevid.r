@@ -2,6 +2,7 @@
 library(rgdal)
 library(dplyr)
 library(readr)
+library(rgeos)
 library(ggplot2)
 library(digest)
 library(mosaic)

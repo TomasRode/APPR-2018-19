@@ -1,10 +1,5 @@
 # 3. faza: Vizualizacija podatkov
 
-library(ggplot2)
-library(rgdal)
-library(rgeos)
-source('uvoz/uvoz.r')
-
 ###NAJPREJ MI ZDRUŽI MAT/SCI/REA
 
 PISA.povprecje <- PISA %>% filter(SUBJECT=='TOT') %>% group_by(LOCATION) %>% summarise(POVPRECJE=mean(Value))
@@ -26,11 +21,7 @@ PISAbdppc <- ggplot(PISA.BDPPC, aes(x=BDPpc,y=POVPRECJE)) + geom_point() + geom_
 
 Kpisabdppc <- stats::cor(PISA.BDPPC$BDPpc, PISA.BDPPC$POVPRECJE)
 
-### OSTALE SPREMENLJIVKE
-
-PISA.ZAIZ <- PISA %>% filter(SUBJECT=='TOT') %>% group_by(LOCATION,TIME) %>% summarise(POVPRECJE=mean(Value)) %>% merge(ZaIzob) %>% filter(is.na(PotrosnjaZaIzob) == FALSE)
-PISAzaiz <- ggplot(PISA.ZAIZ, aes(x=PotrosnjaZaIzob,y=POVPRECJE)) + geom_point() + geom_smooth(method="lm")
-Kpisazaiz <- stats::cor(PISA.ZAIZ$PotrosnjaZaIzob,PISA.ZAIZ$POVPRECJE)
+#RAZMERJE UČENCI VS. UČITELJI
 
 PISA.RAZO <- PISA %>% filter(SUBJECT=='TOT') %>% group_by(LOCATION,TIME) %>% summarise(POVPRECJE=mean(Value)) %>% merge(RazmerjeOS) %>% filter(is.na(RazmerjeUUOS) == FALSE)
 PISArazo <- ggplot(PISA.RAZO, aes(x=RazmerjeUUOS,y=POVPRECJE)) + geom_point() + geom_smooth(method="lm")+
@@ -38,17 +29,23 @@ PISArazo <- ggplot(PISA.RAZO, aes(x=RazmerjeUUOS,y=POVPRECJE)) + geom_point() + 
             xlab("Razmerje med učenci in učitelji v osnovni šoli") + ylab("Povprečje indeksov PISA")
 Kpisarazo <- stats::cor(PISA.RAZO$RazmerjeUUOS,PISA.RAZO$POVPRECJE)
 
-PISA.RAZS <- PISA %>% filter(SUBJECT=='TOT') %>% group_by(LOCATION,TIME) %>% summarise(POVPRECJE=mean(Value)) %>% merge(RazmerjeSS) %>% filter(is.na(RazmerjeUUSS) == FALSE)
-PISArazs <- ggplot(PISA.RAZS, aes(x=RazmerjeUUSS,y=POVPRECJE)) + geom_point() + geom_smooth(method="lm")
-Kpisarazs <- stats::cor(PISA.RAZS$RazmerjeUUSS,PISA.RAZS$POVPRECJE)
+### NI MOČNE POVEZAVE
 
-PISA.ZAOS <- PISA %>% filter(SUBJECT=='TOT', LOCATION!='EST') %>% group_by(LOCATION,TIME) %>% summarise(POVPRECJE=mean(Value)) %>% merge(ZaOsebje) %>% filter(is.na(PotrosnjaZaOsebje) == FALSE)
-PISAzaos <- ggplot(PISA.ZAOS, aes(x=PotrosnjaZaOsebje,y=POVPRECJE)) + geom_point() + geom_smooth(method="lm")
-Kpisazaos <- stats::cor(PISA.ZAOS$PotrosnjaZaOsebje,PISA.ZAOS$POVPRECJE)
+# PISA.ZAIZ <- PISA %>% filter(SUBJECT=='TOT') %>% group_by(LOCATION,TIME) %>% summarise(POVPRECJE=mean(Value)) %>% merge(ZaIzob) %>% filter(is.na(PotrosnjaZaIzob) == FALSE)
+# PISAzaiz <- ggplot(PISA.ZAIZ, aes(x=PotrosnjaZaIzob,y=POVPRECJE)) + geom_point() + geom_smooth(method="lm")
+# Kpisazaiz <- stats::cor(PISA.ZAIZ$PotrosnjaZaIzob,PISA.ZAIZ$POVPRECJE)
 
-PISA.OBV <- PISA %>% filter(SUBJECT=='TOT') %>% group_by(LOCATION,TIME) %>% summarise(POVPRECJE=mean(Value)) %>% merge(ObveznoSol) %>% filter(is.na(ObveznaLeta) == FALSE)
-PISAobv <- ggplot(PISA.OBV, aes(x=ObveznaLeta,y=POVPRECJE)) + geom_col()
-Kpisaobv <- stats::cor(PISA.OBV$ObveznaLeta, PISA.OBV$POVPRECJE)
+# PISA.RAZS <- PISA %>% filter(SUBJECT=='TOT') %>% group_by(LOCATION,TIME) %>% summarise(POVPRECJE=mean(Value)) %>% merge(RazmerjeSS) %>% filter(is.na(RazmerjeUUSS) == FALSE)
+# PISArazs <- ggplot(PISA.RAZS, aes(x=RazmerjeUUSS,y=POVPRECJE)) + geom_point() + geom_smooth(method="lm")
+# Kpisarazs <- stats::cor(PISA.RAZS$RazmerjeUUSS,PISA.RAZS$POVPRECJE)
+# 
+# PISA.ZAOS <- PISA %>% filter(SUBJECT=='TOT', LOCATION!='EST') %>% group_by(LOCATION,TIME) %>% summarise(POVPRECJE=mean(Value)) %>% merge(ZaOsebje) %>% filter(is.na(PotrosnjaZaOsebje) == FALSE)
+# PISAzaos <- ggplot(PISA.ZAOS, aes(x=PotrosnjaZaOsebje,y=POVPRECJE)) + geom_point() + geom_smooth(method="lm")
+# Kpisazaos <- stats::cor(PISA.ZAOS$PotrosnjaZaOsebje,PISA.ZAOS$POVPRECJE)
+# 
+# PISA.OBV <- PISA %>% filter(SUBJECT=='TOT') %>% group_by(LOCATION,TIME) %>% summarise(POVPRECJE=mean(Value)) %>% merge(ObveznoSol) %>% filter(is.na(ObveznaLeta) == FALSE)
+# PISAobv <- ggplot(PISA.OBV, aes(x=ObveznaLeta,y=POVPRECJE)) + geom_col()
+# Kpisaobv <- stats::cor(PISA.OBV$ObveznaLeta, PISA.OBV$POVPRECJE)
 
 ##RAZLIKA MED SPOLOMA
 
