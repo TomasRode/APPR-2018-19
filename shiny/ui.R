@@ -2,7 +2,7 @@ library(shiny)
 
 shinyUI(fluidPage(
   
-  titlePanel("Izobraževanje v državah OECD"),
+  titlePanel("Razvrščanje"),
   sidebarLayout(
     sidebarPanel(
       sliderInput('steviloSkupin', 'Število skupin', min = 2, max = 10, value = 4)

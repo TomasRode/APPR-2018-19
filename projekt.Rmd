@@ -113,6 +113,7 @@ ggplot(PISA.VSE, aes(x= reorder(LOCATION, POVPRECJE),y=POVPRECJE, fill = barve))
 
 ```{r vizualizacija, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
 source("vizualizacija/vizualizacija.r", encoding="UTF-8")
+source("analiza/analiza.r", encoding="UTF-8")
 ```
 
 Spodnji zemljevid prikazuje povprečje indeksa PISA med letoma 2003 in 2015 po državah. Svetlejša barva označuje države, ki so dosegale boljše rezultate, temnejša pa tiste, ki so dosegale slabše. Opazimo, da so bile države v Južni Ameriki manj uspešne, kakor tudi države v Jugo-vzhodni Aziji. Na drugi strani so bile uspešne države v Evropi in Severni Ameriki (predvsem Kanada), kakor tudi Avstralija in Nova Zelandija. Na zemljevidu zaradi neobičajnega mednarodnopravnega statusa ne najdemo Hong-Konga, Singapurja in Macaa.
@@ -155,4 +156,3 @@ shinyAppDir("shiny", options=list(width="100%", height=600))
 #Zaključek
 
 Zdi se mi, da je izobraževanje zelo zanimiva tema, ker je predmet mnogih debat v javnem prostoru in zahteva veliko kolilino načrtovanja, saj se spremembe v sistemu poznajo šele na daljši rok. Izbral sem si zelo ozko področje, ker sem preučeval le rezultate 15-letnikov na treh izbranih področjih. Ugotovil sem, katere države so omogočile najboljše pogoje za svoje učence na področjih matematike, znanosti in branja. Iz prikazanega je razvidno, da so to predvsem bogate države, ki imajo v povprečju manjše razrede. Ti dve spremenljivki sta bili od vseh, ki sem jih obravnaval, najbolj izrazito povezani z uspehom učencev. V skoraj vseh obravnavanih državah pa je veljalo, da so dekleta dosegala boljše rezultate od dečkov.
-***
