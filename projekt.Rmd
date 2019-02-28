@@ -152,7 +152,10 @@ shinyAppDir("shiny", options=list(width="100%", height=600))
 
 ***
 #Zaključek
+<<<<<<< HEAD
 
 Zdi se mi, da je izobraževanje zelo zanimiva tema, ker je predmet mnogih debat v javnem prostoru in zahteva veliko kolilino načrtovanja, saj se spremembe v sistemu poznajo šele na daljši rok. Izbral sem si zelo ozko področje, ker sem preučeval le rezultate 15-letnikov na treh izbranih področjih. Ugotovil sem, katere države so omogočile najboljše pogoje za svoje učence na področjih matematike, znanosti in branja. Iz prikazanega je razvidno, da so to predvsem bogate države, ki imajo v povprečju manjše razrede. Ti dve spremenljivki sta bili od vseh, ki sem jih obravnaval, najbolj izrazito povezani z uspehom učencev. V skoraj vseh obravnavanih državah pa je veljalo, da so dekleta dosegala boljše rezultate od dečkov.
+=======
+>>>>>>> 38b2abf9e1c494a2cd3bea853b983ef8e3adfef4
 
-***
+Zdi se mi, da je izobraževanje zelo zanimiva tema, ker je predmet mnogih debat v javnem prostoru in zahteva veliko kolilino načrtovanja, saj se spremembe v sistemu poznajo šele na daljši rok. Izbral sem si zelo ozko področje, ker sem preučeval le rezultate 15-letnikov na treh izbranih področjih. Ugotovil sem, katere države so omogočile najboljše pogoje za svoje učence na področjih matematike, znanosti in branja. Iz prikazanega je razvidno, da so to predvsem bogate države, ki imajo v povprečju manjše razrede. Ti dve spremenljivki sta bili od vseh, ki sem jih obravnaval, najbolj izrazito povezani z uspehom učencev. V skoraj vseh obravnavanih državah pa je veljalo, da so dekleta dosegala boljše rezultate od dečkov.
