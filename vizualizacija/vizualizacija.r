@@ -55,13 +55,13 @@ Kpisaspolbdp <- stats::cor(PISA.spol.bdp$RAZLIKA, PISA.spol.bdp$BDPpc)
 
 PISA.RAZLIKA <- PISA.SPOL %>% dcast(LOCATION + TIME ~ SUBJECT) %>% transmute(LOCATION, TIME, RAZLIKA=GIRL-BOY) %>% group_by(LOCATION) %>% summarise(PRAZ = mean(RAZLIKA))
 PISArazlika <- ggplot(PISA.RAZLIKA, aes(x= reorder(LOCATION, PRAZ),y=PRAZ, fill=barve)) + geom_col(show.legend = FALSE) + 
-                      ggtitle("Povprečna razlika med rezultati dečkov in deklet po državah") + 
-                      xlab("Države") + ylab("Povprečna razlika (v številu šresežnih točk pri dekletih)") + theme(axis.text.x=element_text(angle=90, hjust=1, vjust=0.5))
+                      ggtitle("Razlika med spoloma po državah") + 
+                      xlab("Države") + ylab("Povprečna razlika (v številu presežnih točk pri dekletih)") + theme(axis.text.x=element_text(angle=90, hjust=1, vjust=0.5))
 
 PISA.DEKvsPOVP <- merge(PISA.RAZLIKA, PISA.povprecje)
 PISAdekletavspovp <- ggplot(PISA.DEKvsPOVP, aes(x=PRAZ,y=POVPRECJE)) + geom_point() + geom_smooth(method="lm")+
-  ggtitle("Povprečje indeksov PISA po povprečni razliki med rezultati deklet in dečkov") + 
-  xlab("Povprečna razlika (v številu šresežnih točk pri dekletih)") + ylab("Povprečje indeksov PISA")
+  ggtitle("Rezultati PISA po razliki med spoloma") + 
+  xlab("Povprečna razlika (v številu presežnih točk pri dekletih)") + ylab("Povprečje indeksov PISA")
 Kpisadekvspovp <- stats::cor(PISA.DEKvsPOVP$PRAZ, PISA.DEKvsPOVP$POVPRECJE)
   
   
@@ -76,6 +76,6 @@ Pzem <- left_join(zemljevid, PISA.povprecje, by = c('ADM0_A3_US'='LOCATION'))
 drzaveZ <- sort(unique(zemljevid$ADM0_A3_US))
 razlike <- unique(PISA.povprecje$LOCATION)[!(unique(PISA.povprecje$LOCATION)%in%unique(Pzem$ADM0_A3_US))]
 # težava: zemljevid nima vnešenih sledečih držav: HONG-KONG, SINGAPUR, MACAO
-Pzemljevid <- ggplot() + geom_polygon(data=Pzem, aes(x=long,y=lat,group=group, fill=POVPRECJE ))
+Pzemljevid <- ggplot() + geom_polygon(data=Pzem, aes(x=long,y=lat,group=group, fill=POVPRECJE )) + labs(fill="Povprečje")
 
 

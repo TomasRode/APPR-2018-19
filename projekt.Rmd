@@ -23,6 +23,8 @@ source("lib/libraries.r", encoding="UTF-8")
 source("lib/rstudio.r", encoding="UTF-8")
 ```
 
+![](slike/RStudio.png)
+
 # Uvod
 
 Analiziral bom podatke o izobraževanju, ki jih najdemo na spletni strani OECD. Za merilo uspešnosti izobraževanja bom, ker gre za države z visoko stopnjo pismenosti, uporabil rezultate testov PISA, ki merijo uspešnost 15-letnikov na treh področjih -- matematika, znanost in branje. Primerjal bom uspešnost držav na teh testih glede na: BDP PPP, število let obveznega šolanja, razmerje med številoma učencev in učiteljev (za osnovne in srednje šole), državno porabo za izobraževanje v % BDP, sredstva namenjena osebju v izobraževanju v % potrošnje v javnih ustanovah.
